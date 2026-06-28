@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bolig til salgs</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#f5f5f5;color:#333}
+header{position:relative;height:70vh;background:url('utvendig.jpg') center/cover no-repeat;display:flex;align-items:center;justify-content:center}
+header::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.45)}
+header h1{position:relative;color:#fff;font-size:3rem;text-align:center;z-index:1}
+section{max-width:1100px;margin:40px auto;padding:0 20px}
+h2{border-bottom:3px solid #2c7;padding-bottom:8px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.card{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.card img{width:100%;height:220px;object-fit:cover}
+.card div{padding:15px}
+footer{text-align:center;padding:30px;background:#222;color:#fff}
+</style>
+</head>
+<body>
+<header><h1>Velkommen til boligen</h1></header>
+
+<section>
+<h2>Hovedbolig</h2>
+<p>Beskrivelse av hovedboligen.</p>
+</section>
+
+<section>
+<h2>Garasjeleilighet</h2>
+<p>Beskrivelse av garasjeleiligheten.</p>
+</section>
+
+<section>
+<h2>Kjeller</h2>
+<p>Beskrivelse av kjelleren.</p>
+</section>
+
+<section>
+<h2>AI-visualiseringer</h2>
+<div class="gallery">
+<div class="card"><img src="Veranda.jpeg" alt="AI veranda"><div><strong>Veranda</strong><br>AI-visualisering.</div></div>
+<div class="card"><img src="veranda1.jpeg" alt="AI veranda 1"><div><strong>Veranda 1</strong><br>AI-visualisering.</div></div>
+<div class="card"><img src="veranda2.jpeg" alt="AI veranda 2"><div><strong>Veranda 2</strong><br>AI-visualisering.</div></div>
+</div>
+</section>
+
+<footer>Alle AI-bilder er merket som visualiseringer og viser et mulig resultat.</footer>
+</body>
+</html>
