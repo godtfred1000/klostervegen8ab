@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Klostervegen 8A og 8B</title>
+<style>
+:root{--bg:#f7f3ec;--ink:#202020;--muted:#626262;--panel:#fffdf8;--line:#e5ded2;--gold:#bd8840;--dark:#181818}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+img{display:block;max-width:100%}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(24,24,24,.94);color:#fff;backdrop-filter:blur(12px)}
+.nav-inner{max-width:1180px;margin:auto;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{font-weight:800;color:#fff;text-decoration:none;line-height:1.2}
+.nav-toggle{display:none;width:44px;height:44px;border:1px solid rgba(255,255,255,.32);border-radius:8px;background:transparent;color:#fff;font-size:24px;cursor:pointer}
+.nav-links{display:flex;gap:6px}
+.nav-links a{color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:9px 12px;border-radius:8px}
+.nav-links a:hover,.nav-links a:focus-visible{background:rgba(255,255,255,.13);outline:none}
+.hero{min-height:88svh;padding:118px 18px 46px;display:flex;align-items:center;background:linear-gradient(90deg,rgba(0,0,0,.68),rgba(0,0,0,.34)),url("https://raw.githubusercontent.com/godtfred1000/klostervegen8ab/main/bilder/utvendig.jpg") center/cover no-repeat;color:#fff}
+.hero-content{width:min(100%,1180px);margin:auto}
+.tag{display:inline-block;padding:8px 13px;border-radius:8px;background:var(--gold);font-size:13px;font-weight:800}
+h1{max-width:780px;margin:18px 0 14px;font-size:clamp(34px,8vw,68px);line-height:1.04}
+.lead{max-width:690px;margin:0;font-size:clamp(17px,3vw,22px);color:rgba(255,255,255,.92)}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 18px;border-radius:8px;text-decoration:none;font-weight:800}
+.primary{background:var(--gold);color:#fff}.secondary{border:2px solid #fff;color:#fff}
+section{max-width:1180px;margin:auto;padding:64px 18px;scroll-margin-top:78px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:20px}
+h2{margin:0;font-size:clamp(28px,5vw,42px);line-height:1.12}
+h3{margin:26px 0 8px;font-size:21px}
+.count{color:var(--muted);font-weight:700;white-space:nowrap}
+.info{background:var(--panel);border:1px solid var(--line);border-radius:8px;box-shadow:0 18px 42px rgba(32,32,32,.12);padding:clamp(20px,4vw,34px)}
+.info p:first-child{margin-top:0}.info ul{margin:8px 0 0;padding-left:20px}.info li+li{margin-top:6px}
+.note{margin-bottom:18px;padding:16px;border-left:5px solid var(--gold);border-radius:8px;background:#fff7d9}
+.gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.photo{grid-column:span 4;padding:0;border:0;border-radius:8px;background:#ddd;box-shadow:0 10px 24px rgba(0,0,0,.09);overflow:hidden;cursor:pointer}
+.photo:first-child{grid-column:span 8}
+.photo img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .24s ease}
+.photo:hover img,.photo:focus-visible img{transform:scale(1.035)}
+.photo:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.contact{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;background:var(--dark);color:#fff;border-radius:8px;padding:24px}
+.contact p{margin:0}.contact a{color:#fff;font-weight:800}
+footer{padding:28px 18px;background:var(--dark);color:rgba(255,255,255,.82);text-align:center}
+.lightbox{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.92)}
+.lightbox.open{display:flex}.lightbox img{max-width:min(100%,1180px);max-height:86svh;border-radius:8px;object-fit:contain}
+.lightbox button{position:absolute;width:46px;height:46px;border:1px solid rgba(255,255,255,.3);border-radius:8px;background:rgba(0,0,0,.45);color:#fff;font-size:28px;cursor:pointer}
+.close{top:16px;right:16px}.prev{left:16px;top:50%;transform:translateY(-50%)}.next{right:16px;top:50%;transform:translateY(-50%)}
+.lightbox button:hover,.lightbox button:focus-visible{background:rgba(189,136,64,.92);outline:none}
+@media(max-width:860px){
+  .nav-inner{flex-wrap:wrap;padding:10px 14px}.nav-toggle{display:inline-flex;align-items:center;justify-content:center}
+  .nav-links{display:none;width:100%;flex-direction:column}.nav-links.open{display:flex}.nav-links a{min-height:44px;padding:10px 12px}
+  .hero{min-height:82svh;padding-top:86px;background:linear-gradient(180deg,rgba(0,0,0,.62),rgba(0,0,0,.38)),url("https://raw.githubusercontent.com/godtfred1000/klostervegen8ab/main/bilder/utvendig.jpg") center/cover no-repeat}
+  section{padding:48px 14px}.section-head{display:block;margin-bottom:16px}.count{display:block;margin-top:4px}
+  .gallery{gap:10px}.photo,.photo:first-child{grid-column:span 6}
+}
+@media(max-width:560px){
+  .actions{display:grid}.btn{width:100%}.photo,.photo:first-child{grid-column:span 12}.photo img{aspect-ratio:16/11}
+  .contact{display:block}.contact p+p{margin-top:10px}.prev,.next{top:auto;bottom:18px;transform:none}.prev{left:calc(50% - 58px)}.next{right:calc(50% - 58px)}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="nav-inner">
+    <a class="brand" href="#top">Klostervegen 8A og 8B</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Åpne meny">☰</button>
+    <nav class="nav-links" id="nav-links" aria-label="Hovedmeny">
+      <a href="#beskrivelse">Beskrivelse</a>
+      <a href="#hoved">Hovedbolig</a>
+      <a href="#garasje">Garasjeleilighet</a>
+      <a href="#kjeller">Kjeller</a>
+      <a href="#ai">AI</a>
+      <a href="#ekstra">Ekstra</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="hero-content">
+    <span class="tag">KLOSTERVEGEN 8A OG 8B</span>
+    <h1>Stor familiebolig med utleiemuligheter</h1>
+    <p class="lead">Ca. 250 m² bolig med hoveddel, innredet kjeller og leilighet over dobbelgarasje.</p>
+    <div class="actions">
+      <a class="btn primary" href="#beskrivelse">Les beskrivelsen</a>
+      <a class="btn secondary" href="#hoved">Se bildene</a>
+    </div>
+  </div>
+</div>
+
+<main>
+  <section id="beskrivelse">
+    <h2>Beskrivelse</h2>
+    <div class="info">
+      <p>Stor og innholdsrik familiebolig med sentral beliggenhet, energieffektive løsninger og gode utleiemuligheter.</p>
+      <h3>Tekniske kvaliteter</h3>
+      <ul>
+        <li>Vannbåren gulvvarme i hele kjelleren og første etasje, samt bad i andre etasje.</li>
+        <li>Viftekonvektor i andre etasje.</li>
+        <li>Luft-til-vann varmepumpe med appstyring.</li>
+        <li>Forvarming av varmtvann ved dusjing.</li>
+        <li>Solfangere koblet til varmtvannstank (anlegget bør kontrolleres før bruk).</li>
+        <li>Fiber fra Altibox.</li>
+        <li>Kablet nettverk i hele boligen og videre til garasjen.</li>
+        <li>To elektriske garasjeporter med appstyring.</li>
+        <li>Lys i de fleste rom kan styres via app.</li>
+        <li>Opparbeidet gårdsplass med heller. Etter ca. 16 år er det fortsatt ingen synlige kjørespor eller setninger.</li>
+      </ul>
+      <h3>Beliggenhet</h3>
+      <ul>
+        <li>Gangavstand til Skien sentrum.</li>
+        <li>Ca. 100 meter til Meny Saga, Coop Prix, bussholdeplass og treningssenter.</li>
+        <li>Gangavstand til Skien Fritidspark, Telemark sentralsykehus og Herkules kjøpesenter.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="hoved" data-gallery="hoved">
+    <div class="section-head"><h2>Hovedbolig</h2><span class="count"></span></div>
+    <div class="gallery"></div>
+  </section>
+
+  <section id="garasje" data-gallery="garasje">
+    <div class="section-head"><h2>Garasjeleilighet</h2><span class="count"></span></div>
+    <div class="gallery"></div>
+  </section>
+
+  <section id="kjeller" data-gallery="kjeller">
+    <div class="section-head"><h2>Kjeller</h2><span class="count"></span></div>
+    <div class="gallery"></div>
+  </section>
+
+  <section id="ai" data-gallery="ai">
+    <div class="section-head"><h2>AI-visualiseringer</h2><span class="count"></span></div>
+    <div class="note"><strong>Merk:</strong> Bildene under er AI-genererte illustrasjoner som viser forslag til innredning og oppgradering. De viser ikke dagens faktiske utførelse.</div>
+    <div class="gallery"></div>
+  </section>
+
+  <section id="ekstra" data-gallery="ekstra">
+    <div class="section-head"><h2>Ekstra bilder</h2><span class="count"></span></div>
+    <div class="gallery"></div>
+  </section>
+
+  <section id="kontakt">
+    <div class="contact"><p><strong>Kontakt</strong></p><p><a href="mailto:godtfred1000@gmail.com">godtfred1000@gmail.com</a></p></div>
+  </section>
+</main>
+
+<footer>© Klostervegen 8A og 8B</footer>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="close" type="button" aria-label="Lukk">×</button>
+  <button class="prev" type="button" aria-label="Forrige bilde">‹</button>
+  <img id="lightbox-image" src="" alt="">
+  <button class="next" type="button" aria-label="Neste bilde">›</button>
+</div>
+
+<script>
+const imageBase = "https://raw.githubusercontent.com/godtfred1000/klostervegen8ab/main/bilder/";
+const galleries = {
+  hoved: [
+    ["utvendig.jpg", "Utvendig bilde av eiendommen"],
+    ["samlebilde.jpg", "Samlebilde fra hovedbolig"],
+    ["stue3.jpg", "Stue"],
+    ["stue4.jpg", "Stue"],
+    ["stuechatgpt.jpg", "Stue visualisering"],
+    ["stuekjokken.jpg", "Stue og kjøkken"],
+    ["kjokken.jpg", "Kjøkken"],
+    ["gang.jpg", "Gang"],
+    ["bilde1.jpg", "Bilde fra hovedbolig"],
+    ["bilde2.jpg", "Bilde fra hovedbolig"],
+    ["bilde3.jpg", "Bilde fra hovedbolig"]
+  ],
+  garasje: [
+    ["IMG_7677.jpeg", "Garasjeleilighet"],
+    ["IMG_7678.jpeg", "Garasjeleilighet"],
+    ["IMG_7679.jpeg", "Garasjeleilighet"],
+    ["IMG_7680.jpeg", "Garasjeleilighet"],
+    ["IMG_7682.jpeg", "Garasjeleilighet"],
+    ["IMG_7683.jpeg", "Garasjeleilighet"],
+    ["IMG_7684.jpeg", "Garasjeleilighet"],
+    ["IMG_7685.jpeg", "Garasjeleilighet"],
+    ["IMG_7686.jpeg", "Garasjeleilighet"],
+    ["IMG_7687.jpeg", "Garasjeleilighet"],
+    ["IMG_7688.jpeg", "Garasjeleilighet"],
+    ["IMG_7689.jpeg", "Garasjeleilighet"],
+    ["IMG_7690.jpeg", "Garasjeleilighet"],
+    ["IMG_7691.jpeg", "Garasjeleilighet"],
+    ["IMG_7692.jpeg", "Garasjeleilighet"],
+    ["IMG_7693.jpeg", "Garasjeleilighet"],
+    ["IMG_7694.jpeg", "Garasjeleilighet"],
+    ["IMG_7695.jpeg", "Garasjeleilighet"],
+    ["IMG_7696.jpeg", "Garasjeleilighet"],
+    ["IMG_7697.jpeg", "Garasjeleilighet"],
+    ["IMG_7698.jpeg", "Garasjeleilighet"],
+    ["IMG_7699.jpeg", "Garasjeleilighet"],
+    ["IMG_7700.jpeg", "Garasjeleilighet"]
+  ],
+  kjeller: [
+    ["IMG_7705.jpeg", "Kjeller"],
+    ["IMG_7706.jpeg", "Kjeller"],
+    ["IMG_7710.jpeg", "Kjeller"],
+    ["stue.jpeg", "Stue i kjeller"],
+    ["bad.jpeg", "Bad i kjeller"],
+    ["samlebilde.jpeg", "Samlebilde fra kjeller"],
+    ["kjeller2.jpg", "Kjeller"],
+    ["kjeller3.jpg", "Kjeller"]
+  ],
+  ai: [
+    ["Veranda.jpeg", "AI-visualisering av veranda"],
+    ["veranda1.jpeg", "AI-visualisering av veranda"],
+    ["veranda2.jpeg", "AI-visualisering av veranda"]
+  ],
+  ekstra: [
+    ["IMG_7504.jpg", "Ekstra bilde"],
+    ["IMG_7505.jpg", "Ekstra bilde"],
+    ["IMG_7506.jpg", "Ekstra bilde"],
+    ["IMG_7507.jpg", "Ekstra bilde"],
+    ["IMG_7508.jpg", "Ekstra bilde"],
+    ["skjermbilde 2026-04-29 kl. 10.02.07.jpg", "Ekstra bilde"]
+  ]
+};
+
+const allImages = [];
+Object.entries(galleries).forEach(([key, images]) => {
+  const section = document.querySelector(`[data-gallery="${key}"]`);
+  const gallery = section.querySelector(".gallery");
+  section.querySelector(".count").textContent = `${images.length} bilder`;
+  images.forEach(([file, alt]) => {
+    const index = allImages.length;
+    const src = imageBase + encodeURIComponent(file);
+    allImages.push({ src, alt });
+    const button = document.createElement("button");
+    button.className = "photo";
+    button.type = "button";
+    button.innerHTML = `<img src="${src}" alt="${alt}" loading="lazy">`;
+    button.addEventListener("click", () => openLightbox(index));
+    gallery.appendChild(button);
+  });
+});
+
+const navToggle = document.querySelector(".nav-toggle");
+const navLinks = document.querySelector(".nav-links");
+navToggle.addEventListener("click", () => {
+  const open = navLinks.classList.toggle("open");
+  navToggle.setAttribute("aria-expanded", String(open));
+});
+navLinks.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    navToggle.setAttribute("aria-expanded", "false");
+  });
+});
+
+const lightbox = document.getElementById("lightbox");
+const lightboxImage = document.getElementById("lightbox-image");
+const closeButton = lightbox.querySelector(".close");
+const prevButton = lightbox.querySelector(".prev");
+const nextButton = lightbox.querySelector(".next");
+let currentIndex = 0;
+
+function showImage(index) {
+  currentIndex = (index + allImages.length) % allImages.length;
+  lightboxImage.src = allImages[currentIndex].src;
+  lightboxImage.alt = allImages[currentIndex].alt;
+}
+
+function openLightbox(index) {
+  showImage(index);
+  lightbox.classList.add("open");
+  lightbox.setAttribute("aria-hidden", "false");
+  closeButton.focus();
+}
+
+function closeLightbox() {
+  lightbox.classList.remove("open");
+  lightbox.setAttribute("aria-hidden", "true");
+  lightboxImage.src = "";
+}
+
+closeButton.addEventListener("click", closeLightbox);
+prevButton.addEventListener("click", () => showImage(currentIndex - 1));
+nextButton.addEventListener("click", () => showImage(currentIndex + 1));
+lightbox.addEventListener("click", (event) => {
+  if (event.target === lightbox) closeLightbox();
+});
+document.addEventListener("keydown", (event) => {
+  if (!lightbox.classList.contains("open")) return;
+  if (event.key === "Escape") closeLightbox();
+  if (event.key === "ArrowLeft") showImage(currentIndex - 1);
+  if (event.key === "ArrowRight") showImage(currentIndex + 1);
+});
+</script>
+</body>
+</html>
