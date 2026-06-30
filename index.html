@@ -30,6 +30,7 @@ section{max-width:1180px;margin:auto;padding:64px 18px;scroll-margin-top:78px}
 .section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:20px}
 h2{margin:0;font-size:clamp(28px,5vw,42px);line-height:1.12}
 h3{margin:26px 0 8px;font-size:21px}
+.desc{margin:0 0 18px;color:var(--muted);font-size:18px}
 .count{color:var(--muted);font-weight:700;white-space:nowrap}
 .info{background:var(--panel);border:1px solid var(--line);border-radius:8px;box-shadow:0 18px 42px rgba(32,32,32,.12);padding:clamp(20px,4vw,34px)}
 .info p:first-child{margin-top:0}.info ul{margin:8px 0 0;padding-left:20px}.info li+li{margin-top:6px}
@@ -70,6 +71,7 @@ footer{padding:28px 18px;background:var(--dark);color:rgba(255,255,255,.82);text
     <nav class="nav-links" id="nav-links" aria-label="Hovedmeny">
       <a href="#beskrivelse">Beskrivelse</a>
       <a href="#hoved">Hovedbolig</a>
+      <a href="#etasje2">2. etasje</a>
       <a href="#garasje">Garasjeleilighet</a>
       <a href="#kjeller">Kjeller</a>
       <a href="#ai">AI</a>
@@ -127,13 +129,21 @@ footer{padding:28px 18px;background:var(--dark);color:rgba(255,255,255,.82);text
     <div class="gallery"></div>
   </section>
 
+  <section id="etasje2" data-gallery="etasje2">
+    <div class="section-head"><h2>2. etasje hovedhus</h2><span class="count"></span></div>
+    <p class="desc">Bilder fra 2. etasje i hovedhuset, med soverom, bad og øvrige rom.</p>
+    <div class="gallery"></div>
+  </section>
+
   <section id="garasje" data-gallery="garasje">
     <div class="section-head"><h2>Garasjeleilighet</h2><span class="count"></span></div>
+    <p class="desc">Egen leilighet over dobbelgarasje med stue, kjøkken, bad og 2 soverom.</p>
     <div class="gallery"></div>
   </section>
 
   <section id="kjeller" data-gallery="kjeller">
     <div class="section-head"><h2>Kjeller</h2><span class="count"></span></div>
+    <p class="desc">Innredet kjeller med kjellerstue, bad og 1 soverom.</p>
     <div class="gallery"></div>
   </section>
 
@@ -165,6 +175,7 @@ footer{padding:28px 18px;background:var(--dark);color:rgba(255,255,255,.82);text
 
 <script>
 const imageBase = "https://raw.githubusercontent.com/godtfred1000/klostervegen8ab/main/bilder/";
+const imagePath = (file) => imageBase + file.split("/").map(encodeURIComponent).join("/");
 const galleries = {
   hoved: [
     ["utvendig.jpg", "Utvendig bilde av eiendommen"],
@@ -178,6 +189,16 @@ const galleries = {
     ["bilde1.jpg", "Bilde fra hovedbolig"],
     ["bilde2.jpg", "Bilde fra hovedbolig"],
     ["bilde3.jpg", "Bilde fra hovedbolig"]
+  ],
+  etasje2: [
+    ["2etg/2etg stue.jpeg", "Stue i 2. etasje"],
+    ["2etg/2etg mot trappen.jpeg", "2. etasje mot trappen"],
+    ["2etg/Sov lite 2etg.jpeg", "Lite soverom i 2. etasje"],
+    ["2etg/Sov medium 2etg.jpeg", "Soverom i 2. etasje"],
+    ["2etg/Sov stort 2 etg.jpeg", "Stort soverom i 2. etasje"],
+    ["2etg/bad 2etg.jpeg", "Bad i 2. etasje"],
+    ["2etg/bad 2etg speil.jpeg", "Bad i 2. etasje"],
+    ["2etg/2etg dusj.jpeg", "Dusj i 2. etasje"]
   ],
   garasje: [
     ["IMG_7677.jpeg", "Garasjeleilighet"],
@@ -216,6 +237,12 @@ const galleries = {
   ],
   ai: [
     ["ai-stue.png", "AI-visualisering av stue"],
+    ["Ai/Stue ai.jpeg", "AI-visualisering av stue"],
+    ["Ai/Stue1 ai.jpeg", "AI-visualisering av stue"],
+    ["Ai/Sov lite ai.jpeg", "AI-visualisering av lite soverom"],
+    ["Ai/Sov med ai.jpeg", "AI-visualisering av soverom"],
+    ["Ai/Sov medium ai.jpeg", "AI-visualisering av soverom"],
+    ["Ai/sov stort ai.jpeg", "AI-visualisering av stort soverom"],
     ["Veranda.jpeg", "AI-visualisering av veranda"],
     ["veranda1.jpeg", "AI-visualisering av veranda"],
     ["veranda2.jpeg", "AI-visualisering av veranda"]
@@ -237,7 +264,7 @@ Object.entries(galleries).forEach(([key, images]) => {
   section.querySelector(".count").textContent = `${images.length} bilder`;
   images.forEach(([file, alt]) => {
     const index = allImages.length;
-    const src = imageBase + encodeURIComponent(file);
+    const src = imagePath(file);
     allImages.push({ src, alt });
     const button = document.createElement("button");
     button.className = "photo";
