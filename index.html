@@ -45,6 +45,26 @@ h3{margin:26px 0 8px;font-size:21px}
 .photo:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 .contact{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;background:var(--dark);color:#fff;border-radius:8px;padding:24px}
 .contact p{margin:0}.contact a{color:#fff;font-weight:800}
+
+.contact-section{display:grid;grid-template-columns:1fr 1.25fr;gap:24px;align-items:start}
+.contact-card,.contact-form{background:var(--panel);border:1px solid var(--line);border-radius:8px;box-shadow:0 18px 42px rgba(32,32,32,.10);padding:24px}
+.contact-card h3,.contact-form h3{margin-top:0}
+.contact-card p{margin:0 0 12px}
+.contact-card a{color:var(--ink);font-weight:800}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-group.full{grid-column:1/-1}
+.form-group label{font-weight:800}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:12px 13px;border:1px solid #cfc6b8;border-radius:8px;background:#fff;color:var(--ink);font:inherit}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:3px solid rgba(189,136,64,.24);border-color:var(--gold)}
+.form-group textarea{min-height:150px;resize:vertical}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--muted)}
+.consent input{margin-top:4px}
+.submit-btn{border:0;cursor:pointer;font:inherit}
+.form-note{margin:10px 0 0;color:var(--muted);font-size:14px}
+.success-message{display:none;margin-top:14px;padding:12px;border-radius:8px;background:#eaf7ea;color:#1d5f24;font-weight:700}
+@media(max-width:760px){.contact-section{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}}
+
 footer{padding:28px 18px;background:var(--dark);color:rgba(255,255,255,.82);text-align:center}
 .lightbox{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.92)}
 .lightbox.open{display:flex}.lightbox img{max-width:min(100%,1180px);max-height:86svh;border-radius:8px;object-fit:contain}
@@ -187,7 +207,33 @@ footer{padding:28px 18px;background:var(--dark);color:rgba(255,255,255,.82);text
   </section>
 
   <section id="kontakt">
-    <div class="contact"><p><strong>Kontakt</strong></p><p><a href="mailto:godtfred1000@gmail.com">godtfred1000@gmail.com</a></p></div>
+    <div class="section-head"><h2>Kontakt og interesse</h2></div>
+    <div class="contact-section">
+      <div class="contact-card">
+        <h3>Interessert i eiendommen?</h3>
+        <p>Send en melding dersom du ønsker mer informasjon, vil avtale visning eller har spørsmål om boligen.</p>
+        <p><strong>E-post</strong><br><a href="mailto:post@klostervegen.no">post@klostervegen.no</a></p>
+        <p class="form-note">Henvendelser besvares så snart som mulig.</p>
+      </div>
+
+      <form class="contact-form" id="interest-form" action="https://api.web3forms.com/submit" method="POST">
+        <h3>Send melding</h3>
+        <input type="hidden" name="access_key" value="dc790292-4e7d-4485-8d18-e0ef5e136e21">
+        <input type="hidden" name="subject" value="Ny henvendelse om Klostervegen 8A">
+        <input type="hidden" name="from_name" value="Klostervegen 8A nettside">
+        <input type="checkbox" name="botcheck" style="display:none">
+        <div class="form-grid">
+          <div class="form-group"><label for="name">Navn *</label><input id="name" name="name" type="text" autocomplete="name" required></div>
+          <div class="form-group"><label for="phone">Telefon *</label><input id="phone" name="phone" type="tel" autocomplete="tel" required></div>
+          <div class="form-group"><label for="email">E-post *</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+          <div class="form-group"><label for="interest">Hva gjelder det?</label><select id="interest" name="interest"><option value="Ønsker mer informasjon">Ønsker mer informasjon</option><option value="Ønsker visning">Ønsker visning</option><option value="Spørsmål om eiendommen">Spørsmål om eiendommen</option><option value="Annet">Annet</option></select></div>
+          <div class="form-group full"><label for="preferred_time">Ønsket dato eller tidspunkt for visning</label><input id="preferred_time" name="preferred_time" type="text" placeholder="For eksempel lørdag etter kl. 14"></div>
+          <div class="form-group full"><label for="message">Melding *</label><textarea id="message" name="message" placeholder="Skriv meldingen din her..." required></textarea></div>
+          <div class="form-group full"><label class="consent"><input type="checkbox" name="consent" value="Ja" required><span>Jeg godtar at opplysningene brukes for å besvare denne henvendelsen. *</span></label></div>
+          <div class="form-group full"><button class="btn primary submit-btn" type="submit">Send melding</button><p class="form-note">Felter merket med * må fylles ut.</p><div class="success-message" id="success-message">Takk! Meldingen er sendt.</div></div>
+        </div>
+      </form>
+    </div>
   </section>
 </main>
 
@@ -373,6 +419,36 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowLeft") showImage(currentIndex - 1);
   if (event.key === "ArrowRight") showImage(currentIndex + 1);
 });
+
+const interestForm = document.getElementById("interest-form");
+const successMessage = document.getElementById("success-message");
+interestForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const submitButton = interestForm.querySelector('button[type="submit"]');
+  const originalText = submitButton.textContent;
+  submitButton.disabled = true;
+  submitButton.textContent = "Sender...";
+  try {
+    const response = await fetch(interestForm.action, { method: "POST", body: new FormData(interestForm), headers: { "Accept": "application/json" } });
+    const result = await response.json();
+    if (response.ok && result.success) {
+      interestForm.reset();
+      successMessage.style.display = "block";
+      successMessage.style.background = "#eaf7ea";
+      successMessage.style.color = "#1d5f24";
+      successMessage.textContent = "Takk! Meldingen er sendt.";
+    } else { throw new Error(result.message || "Kunne ikke sende meldingen."); }
+  } catch (error) {
+    successMessage.style.display = "block";
+    successMessage.style.background = "#fdeaea";
+    successMessage.style.color = "#7a1f1f";
+    successMessage.textContent = "Meldingen kunne ikke sendes. Prøv igjen, eller send e-post til post@klostervegen.no.";
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = originalText;
+  }
+});
+
 </script>
 </body>
 </html>
