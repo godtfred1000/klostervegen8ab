@@ -43,6 +43,7 @@ h3{margin:26px 0 8px;font-size:21px}
 .info p:first-child{margin-top:0}.info ul{margin:8px 0 0;padding-left:20px}.info li+li{margin-top:6px}
 .map-frame{width:100%;height:360px;margin:18px 0;border:0;border-radius:8px;box-shadow:0 10px 24px rgba(0,0,0,.09)}
 .map-image{width:100%;margin:18px 0;border-radius:8px;box-shadow:0 10px 24px rgba(0,0,0,.09)}
+.map-image-small{width:min(100%,650px);margin:18px auto}
 .note{margin-bottom:18px;padding:16px;border-left:5px solid var(--gold);border-radius:8px;background:#fff7d9}
 .gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
 .photo{grid-column:span 4;padding:0;border:0;border-radius:8px;background:#ddd;box-shadow:0 10px 24px rgba(0,0,0,.09);overflow:hidden;cursor:pointer}
@@ -237,10 +238,14 @@ footer{padding:28px 18px;background:var(--dark);color:rgba(255,255,255,.82);text
     <div class="section-head"><h2>Kart og beliggenhet</h2></div>
     <div class="info">
       <p>Klostervegen 8A ligger meget sentralt til i Skien, men samtidig i en blindvei. Her er det kort vei til sentrum, dagligvare, buss, treningssenter, fritidstilbud, sykehus og kjøpesenter.</p>
-      <p>Tomten er ca. 1014 m². Det kan på sikt være mulig å utvide tomten til ca. 1120 m² dersom man kommer til enighet om kjøp av tilleggsarealet markert som trekanten utenfor dagens tomt.</p>
-      <img class="map-image" src="https://raw.githubusercontent.com/godtfred1000/klostervegen8ab/main/bilder/tomt-kart.png" alt="Kartutsnitt som viser dagens tomt og mulig tilleggsareal" loading="lazy">
-      <img class="map-image" src="https://raw.githubusercontent.com/godtfred1000/klostervegen8ab/main/bilder/tilleggsareal-220-274.png" alt="Kart som viser mulig tilleggsareal 220/274 på cirka 106 kvadratmeter" loading="lazy">
-      <div class="note"><strong>Mulig tilleggsareal:</strong> Eiendommen 220/274 er på 106 m² og ligger langs vestsiden av dagens tomt. Arealet er ikke en del av dagens eiendom eller prisantydning, men kan eventuelt kjøpes dersom man kommer til enighet med eieren.</div>
+      <p>Tomten er ca. 1014 m². Det kan på sikt være mulig å utvide tomten til ca. 1115 m² dersom man kommer til enighet om kjøp av tilleggsarealet markert som trekanten utenfor dagens tomt.</p>
+      <h3>Dagens tomt</h3>
+      <img class="map-image map-image-small" src="https://raw.githubusercontent.com/godtfred1000/klostervegen8ab/main/bilder/dagens-arealmal.png" alt="Kart som viser dagens tomt med gårds- og bruksnummer 220/379" loading="lazy">
+      <p class="form-note">Kart som viser dagens eiendom 220/379 med Klostervegen 8A og 8B.</p>
+
+      <h3>Mulig tilleggsareal</h3>
+      <img class="map-image map-image-small" src="https://raw.githubusercontent.com/godtfred1000/klostervegen8ab/main/bilder/tilleggsareal-220-274.png" alt="Kart som viser mulig tilleggsareal 220/274 på cirka 106 kvadratmeter" loading="lazy">
+      <div class="note"><strong>Mulig tilleggsareal:</strong> Eiendommen 220/274 er på ca. 106 m² og ligger langs vestsiden av dagens tomt. Arealet er ikke en del av dagens eiendom eller prisantydning, men kan eventuelt kjøpes dersom man kommer til enighet med eieren.</div>
       <iframe class="map-frame" title="Kart til Klostervegen 8A, Skien" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Klostervegen%208A%2C%20Skien&output=embed"></iframe>
       <p><a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=Klostervegen+8A%2C+Skien" target="_blank" rel="noopener">Åpne i Google Maps</a></p>
     </div>
